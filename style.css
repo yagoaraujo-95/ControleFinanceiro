@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.filtro {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filtro input {
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.grafico-container {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+
+    width: 100%;
+    max-width: 350px; /* largura máxima */
+    
+    display: flex;
+    justify-content: center;
+}
+
+#grafico {
+    width: 100% !important;
+    max-width: 350px;
+    height: 220px !important; /* altura fixa */
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* RESUMO */
+.resumo {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+/* CORES */
+.receita { background: #16a34a; }
+.despesa { background: #dc2626; }
+.saldo { background: #2563eb; }
+
+/* FORM */
+form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    flex: 1;
+}
+
+button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+/* TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1e293b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+    text-align: center;
+}
+
+/* CORES DINÂMICAS (JS usa isso) */
+td.receita {
+    color: #5ded92;
+    font-weight: bold;
+}
+
+td.despesa {
+    color: #f4a2a2;
+    font-weight: bold;
+}
+
+/* BOTÕES */
+button.editar {
+    background: orange;
+}
+
+button.excluir {
+    background: red;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+
+    .resumo {
+        flex-direction: column;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table, tbody, tr, td {
+        display: block;
+        width: 100%;
+    }
+
+    tr {
+        margin-bottom: 10px;
+        background: #1e293b;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    td {
+        text-align: left;
+        padding: 5px 0;
+    }
+}

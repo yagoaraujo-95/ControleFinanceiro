@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="App de controle financeiro simples">
+
+    <title>Controle Financeiro</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Controle Financeiro</h1>
+
+        <!-- RESUMO -->
+        <div class="resumo">
+            <div class="card receita">
+                <h3>Receitas</h3>
+                <p id="total-receita">R$ 0,00</p>
+            </div>
+
+            <div class="card despesa">
+                <h3>Despesas</h3>
+                <p id="total-despesa">R$ 0,00</p>
+            </div>
+
+            <div class="card saldo">
+                <h3>Saldo</h3>
+                <p id="saldo">R$ 0,00</p>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <form id="form">
+
+            <input 
+                type="text" 
+                id="descricao" 
+                placeholder="Descrição" 
+                required
+            >
+
+            <!-- 🔥 CORRIGIDO AQUI -->
+            <input 
+                type="text" 
+                id="valor" 
+                placeholder="Valor (R$)" 
+                inputmode="decimal"
+                required
+            >
+
+            <select id="tipo" required>
+                <option value="">Tipo</option>
+                <option value="receita">Receita</option>
+                <option value="despesa">Despesa</option>
+            </select>
+
+            <input type="date" id="data" required>
+
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <!-- FILTRO POR MÊS -->
+        <div class="filtro">
+            <label for="mes">Filtrar por mês:</label>
+            <input type="month" id="mes">
+        </div>
+
+        <!-- GRÁFICO RESUMO -->
+        <h3 style="text-align:center;">Resumo Financeiro</h3>
+        <div class="grafico-container">
+            <canvas id="grafico"></canvas>
+        </div>
+
+        <!-- GRÁFICO EVOLUÇÃO -->
+        <h3 style="text-align:center;">Evolução Mensal</h3>
+        <div class="grafico-container">
+            <canvas id="graficoLinha"></canvas>
+        </div>
+
+        <!-- TABELA -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Tipo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="lista"></tbody>
+        </table>
+
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="script.js"></script>
+</body>
+</html>
