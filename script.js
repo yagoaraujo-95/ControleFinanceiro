@@ -1,24 +1,35 @@
+// 🔐 PROTEÇÃO DE ROTA (RODA PRIMEIRO)
+if (localStorage.getItem("logado") !== "true") {
+    window.location.href = "login.html";
+}
+
+// ===============================
 // ELEMENTOS
+// ===============================
 const form = document.getElementById("form");
 const lista = document.getElementById("lista");
 const filtroMes = document.getElementById("mes");
 
 // EVENTO FILTRO
-filtroMes.addEventListener("change", renderizar);
+if (filtroMes) {
+    filtroMes.addEventListener("change", renderizar);
+}
 
+// ===============================
 // GRÁFICOS
+// ===============================
 let grafico;
 let graficoLinha;
 
+// ===============================
 // DADOS
+// ===============================
 let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
 let editIndex = null;
 
-/*
-==================================================
-FUNÇÕES AUXILIARES
-==================================================
-*/
+// ===============================
+// FUNÇÕES AUXILIARES
+// ===============================
 
 // Salvar no LocalStorage
 function salvarLocal() {
@@ -49,17 +60,15 @@ function formatarMoeda(valor) {
     });
 }
 
-/*
-==================================================
-RESUMO
-==================================================
-*/
+// ===============================
+// RESUMO
+// ===============================
 function atualizarResumo() {
     let receitas = 0;
     let despesas = 0;
 
     transacoes.forEach(t => {
-        if (!t || !t.tipo) return;
+        if (!t || !t.tipo || !t.valor) return;
 
         if (t.tipo === "receita") {
             receitas += t.valor;
@@ -73,11 +82,9 @@ function atualizarResumo() {
     document.getElementById("saldo").textContent = formatarMoeda(receitas - despesas);
 }
 
-/*
-==================================================
-GRÁFICO PIZZA
-==================================================
-*/
+// ===============================
+// GRÁFICO PIZZA
+// ===============================
 function atualizarGrafico() {
 
     const receitas = transacoes
@@ -110,11 +117,9 @@ function atualizarGrafico() {
     });
 }
 
-/*
-==================================================
-GRÁFICO LINHA (POR MÊS)
-==================================================
-*/
+// ===============================
+// GRÁFICO LINHA
+// ===============================
 function atualizarGraficoLinha() {
 
     const dadosPorMes = {};
@@ -174,11 +179,9 @@ function atualizarGraficoLinha() {
     });
 }
 
-/*
-==================================================
-RENDERIZAR
-==================================================
-*/
+// ===============================
+// RENDERIZAR
+// ===============================
 function renderizar() {
     lista.innerHTML = "";
 
@@ -186,7 +189,7 @@ function renderizar() {
 
     transacoes.forEach((t, index) => {
 
-        if (!t || !t.descricao) return;
+        if (!t || !t.descricao || !t.valor) return;
 
         if (mesSelecionado) {
             const mesTransacao = t.data.slice(0, 7);
@@ -214,42 +217,40 @@ function renderizar() {
     atualizarGraficoLinha();
 }
 
-/*
-==================================================
-SUBMIT
-==================================================
-*/
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
+// ===============================
+// SUBMIT
+// ===============================
+if (form) {
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    const descricao = document.getElementById("descricao").value.trim();
-    const valorInput = document.getElementById("valor").value;
-    const valor = converterValor(valorInput);
-    const tipo = document.getElementById("tipo").value;
-    const data = document.getElementById("data").value;
+        const descricao = document.getElementById("descricao").value.trim();
+        const valorInput = document.getElementById("valor").value;
+        const valor = converterValor(valorInput);
+        const tipo = document.getElementById("tipo").value;
+        const data = document.getElementById("data").value;
 
-    if (!descricao || !valorInput || isNaN(valor) || valor <= 0 || !tipo || !data) {
-        alert("Preencha todos os campos corretamente!");
-        return;
-    }
+        if (!descricao || !valorInput || isNaN(valor) || valor <= 0 || !tipo || !data) {
+            alert("Preencha todos os campos corretamente!");
+            return;
+        }
 
-    if (editIndex !== null) {
-        transacoes[editIndex] = { descricao, valor, tipo, data };
-        editIndex = null;
-    } else {
-        transacoes.push({ descricao, valor, tipo, data });
-    }
+        if (editIndex !== null) {
+            transacoes[editIndex] = { descricao, valor, tipo, data };
+            editIndex = null;
+        } else {
+            transacoes.push({ descricao, valor, tipo, data });
+        }
 
-    salvarLocal();
-    renderizar();
-    form.reset();
-});
+        salvarLocal();
+        renderizar();
+        form.reset();
+    });
+}
 
-/*
-==================================================
-EXCLUIR
-==================================================
-*/
+// ===============================
+// EXCLUIR
+// ===============================
 function excluir(index) {
     if (confirm("Deseja realmente excluir?")) {
         transacoes.splice(index, 1);
@@ -258,16 +259,14 @@ function excluir(index) {
     }
 }
 
-/*
-==================================================
-EDITAR
-==================================================
-*/
+// ===============================
+// EDITAR
+// ===============================
 function editar(index) {
     const t = transacoes[index];
 
     document.getElementById("descricao").value = t.descricao;
-    document.getElementById("valor").value = t.valor;
+    document.getElementById("valor").value = t.valor.toString().replace(".", ",");
     document.getElementById("tipo").value = t.tipo;
     document.getElementById("data").value = t.data;
 
@@ -279,5 +278,15 @@ function editar(index) {
     });
 }
 
+// ===============================
+// LOGOUT
+// ===============================
+function logout() {
+    localStorage.removeItem("logado");
+    window.location.href = "login.html";
+}
+
+// ===============================
 // INICIAR
+// ===============================
 renderizar();

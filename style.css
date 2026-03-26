@@ -1,11 +1,114 @@
+/* ================= RESET ================= */
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
+}
+
+/* ================= LOGIN ================= */
+body.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+/* CARD LOGIN COM ESTILO BONITO */
+.login-card {
+    width: 50%;
+    max-width: 350px;
+    min-width: 250px;
+
+    padding: 30px;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    animation: fadeIn 0.5s ease;
+}
+
+/* TÍTULO */
+.login-card h3 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* INPUTS LOGIN */
+.login-card input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+
+/* FOCO INPUT */
+.login-card input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 5px rgba(13,110,253,0.5);
+}
+
+/* BOTÕES LOGIN */
+.login-card .btn {
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+/* HOVER BOTÃO */
+.login-card .btn:hover {
+    transform: scale(1.02);
+}
+
+/* ERRO */
+#erro {
+    font-size: 14px;
+}
+
+/* RESPONSIVO LOGIN */
+@media (max-width: 600px) {
+    .login-card {
+        width: 90%;
+    }
+}
+
+/* ================= APP (INDEX) ================= */
+body.app {
     background: #0f172a;
     color: white;
-    margin: 0;
     padding: 20px;
 }
 
+/* CONTAINER */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* TOPO */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.topo button {
+    background: #dc2626;
+}
+
+/* FILTRO */
 .filtro {
     margin-bottom: 15px;
     display: flex;
@@ -18,15 +121,14 @@ body {
     border-radius: 5px;
 }
 
+/* GRÁFICO */
 .grafico-container {
     background: #1e293b;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
-
     width: 100%;
-    max-width: 350px; /* largura máxima */
-    
+    max-width: 350px;
     display: flex;
     justify-content: center;
 }
@@ -34,23 +136,12 @@ body {
 #grafico {
     width: 100% !important;
     max-width: 350px;
-    height: 220px !important; /* altura fixa */
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 15px;
-}
-
-h1 {
-    text-align: center;
+    height: 220px !important;
 }
 
 /* RESUMO */
 .resumo {
     display: flex;
-    justify-content: space-between;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -83,6 +174,7 @@ input, select {
     flex: 1;
 }
 
+/* BOTÕES */
 button {
     padding: 10px;
     border-radius: 5px;
@@ -91,6 +183,14 @@ button {
     color: white;
     cursor: pointer;
     min-width: 100px;
+}
+
+button.editar {
+    background: orange;
+}
+
+button.excluir {
+    background: red;
 }
 
 /* TABELA */
@@ -108,7 +208,7 @@ th, td {
     text-align: center;
 }
 
-/* CORES DINÂMICAS (JS usa isso) */
+/* CORES DINÂMICAS */
 td.receita {
     color: #5ded92;
     font-weight: bold;
@@ -119,16 +219,7 @@ td.despesa {
     font-weight: bold;
 }
 
-/* BOTÕES */
-button.editar {
-    background: orange;
-}
-
-button.excluir {
-    background: red;
-}
-
-/* RESPONSIVO */
+/* RESPONSIVO APP */
 @media (max-width: 600px) {
 
     .resumo {
@@ -158,5 +249,17 @@ button.excluir {
     td {
         text-align: left;
         padding: 5px 0;
+    }
+}
+
+/* ================= ANIMAÇÃO ================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

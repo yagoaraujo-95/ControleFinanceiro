@@ -9,14 +9,21 @@
     <title>Controle Financeiro</title>
 
     <link rel="stylesheet" href="style.css">
+    
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body class="app">
+
     <div class="container">
-        <h1>Controle Financeiro</h1>
+
+        <!-- TOPO -->
+        <div class="topo">
+            <h1>Controle Financeiro</h1>
+            <button onclick="logout()">Sair</button>
+        </div>
 
         <!-- RESUMO -->
         <div class="resumo">
@@ -46,7 +53,6 @@
                 required
             >
 
-            <!-- 🔥 CORRIGIDO AQUI -->
             <input 
                 type="text" 
                 id="valor" 
@@ -66,20 +72,20 @@
             <button type="submit">Adicionar</button>
         </form>
 
-        <!-- FILTRO POR MÊS -->
+        <!-- FILTRO -->
         <div class="filtro">
             <label for="mes">Filtrar por mês:</label>
             <input type="month" id="mes">
         </div>
 
         <!-- GRÁFICO RESUMO -->
-        <h3 style="text-align:center;">Resumo Financeiro</h3>
+        <h3 class="titulo">Resumo Financeiro</h3>
         <div class="grafico-container">
             <canvas id="grafico"></canvas>
         </div>
 
         <!-- GRÁFICO EVOLUÇÃO -->
-        <h3 style="text-align:center;">Evolução Mensal</h3>
+        <h3 class="titulo">Evolução Mensal</h3>
         <div class="grafico-container">
             <canvas id="graficoLinha"></canvas>
         </div>
@@ -102,5 +108,6 @@
 
     <!-- SCRIPT -->
     <script src="script.js"></script>
+
 </body>
 </html>
